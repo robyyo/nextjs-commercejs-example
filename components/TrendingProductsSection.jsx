@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const TrendingProductsSection = ({ trendingProducts }) => {
   return (
@@ -11,13 +12,13 @@ const TrendingProductsSection = ({ trendingProducts }) => {
           >
             Trending Products
           </h2>
-          <a
-            href="#"
+          <Link
+            href="/products"
             className="hidden text-sm font-medium text-amber-600 hover:text-amber-500 md:block"
           >
             Shop the collection
             <span aria-hidden="true"> &rarr;</span>
-          </a>
+          </Link>
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
@@ -31,10 +32,10 @@ const TrendingProductsSection = ({ trendingProducts }) => {
                 />
               </div>
               <h3 className="mt-4 text-sm text-gray-700">
-                <a href={product.href}>
+                <Link href={product.href}>
                   <span className="absolute inset-0" />
                   {product.name}
-                </a>
+                </Link>
               </h3>
               <p className="mt-1 text-sm text-gray-500">{product.color}</p>
               <p className="mt-1 text-sm font-medium text-gray-900">
@@ -45,13 +46,13 @@ const TrendingProductsSection = ({ trendingProducts }) => {
         </div>
 
         <div className="mt-8 text-sm md:hidden">
-          <a
-            href="#"
+          <Link
+            href="/products"
             className="font-medium text-amber-600 hover:text-amber-500"
           >
             Shop the collection
             <span aria-hidden="true"> &rarr;</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

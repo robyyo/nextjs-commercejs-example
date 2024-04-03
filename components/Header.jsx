@@ -6,6 +6,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 const navigation = {
   categories: [
@@ -169,7 +170,7 @@ function Header() {
                                   className="object-cover object-center"
                                 />
                               </div>
-                              <a
+                              <Link
                                 href={item.href}
                                 className="mt-6 block text-sm font-medium text-gray-900"
                               >
@@ -178,7 +179,7 @@ function Header() {
                                   aria-hidden="true"
                                 />
                                 {item.name}
-                              </a>
+                              </Link>
                               <p
                                 aria-hidden="true"
                                 className="mt-1 text-sm text-gray-500"
@@ -195,20 +196,20 @@ function Header() {
 
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   <div className="flow-root">
-                    <a
+                    <Link
                       href="#"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Create an account
-                    </a>
+                    </Link>
                   </div>
                   <div className="flow-root">
-                    <a
+                    <Link
                       href="#"
                       className="-m-2 block p-2 font-medium text-gray-900"
                     >
                       Sign in
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </Dialog.Panel>
@@ -227,11 +228,11 @@ function Header() {
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="#">
+                  <Link href="/">
                     <span className="text-2xl text-slate-600 font-bold">
                       Cabinet of Curiosities
                     </span>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="hidden h-full lg:flex">
@@ -305,7 +306,7 @@ function Header() {
                                                 className="object-cover object-center"
                                               />
                                             </div>
-                                            <a
+                                            <Link
                                               href={item.href}
                                               className="mt-4 block font-medium text-gray-900"
                                             >
@@ -314,7 +315,7 @@ function Header() {
                                                 aria-hidden="true"
                                               />
                                               {item.name}
-                                            </a>
+                                            </Link>
                                             <p
                                               aria-hidden="true"
                                               className="mt-1"
@@ -349,17 +350,20 @@ function Header() {
                 </div>
 
                 {/* Logo (lg-) */}
-                <a href="#" className="lg:hidden">
+                <Link href="/" className="lg:hidden">
                   <span className="text-2xl text-slate-600 font-bold">
                     Cabinet of Curiosities
                   </span>
-                </a>
+                </Link>
 
                 <div className="flex flex-1 items-center justify-end">
                   <div className="flex items-center lg:ml-8">
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-8">
-                      <a href="#" className="group -m-2 flex items-center p-2">
+                      <Link
+                        href="#"
+                        className="group -m-2 flex items-center p-2"
+                      >
                         <ShoppingBagIcon
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
@@ -368,7 +372,7 @@ function Header() {
                           0
                         </span>
                         <span className="sr-only">items in cart, view bag</span>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
