@@ -1,6 +1,7 @@
 'use client'
 
 import HeroSection from '@/components/HeroSection'
+import TrendingProductsSection from '@/components/TrendingProductsSection'
 
 const navigation = {
   categories: [
@@ -151,97 +152,13 @@ const trendingProducts = [
   },
 ]
 
-const perks = [
-  {
-    name: 'Free returns',
-    imageUrl:
-      'https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg',
-    description:
-      'Not what you expected? Place it back in the parcel and attach the pre-paid postage stamp.',
-  },
-  {
-    name: 'Same day delivery',
-    imageUrl:
-      'https://tailwindui.com/img/ecommerce/icons/icon-calendar-light.svg',
-    description:
-      'We offer a delivery service that has never been done before. Checkout today and receive your products within hours.',
-  },
-  {
-    name: 'All year discount',
-    imageUrl:
-      'https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg',
-    description:
-      'Looking for a deal? You can use the code "ALLYEAR" at checkout and get money off all year round.',
-  },
-  {
-    name: 'For the planet',
-    imageUrl:
-      'https://tailwindui.com/img/ecommerce/icons/icon-planet-light.svg',
-    description:
-      'We’ve pledged 1% of sales to the preservation and restoration of the natural environment.',
-  },
-]
-
 export default function HomePage() {
   return (
     <div className="bg-white">
       <main>
         {/* Hero section */}
         <HeroSection collections={collections} />
-
-        <section aria-labelledby="trending-heading">
-          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
-            <div className="md:flex md:items-center md:justify-between">
-              <h2
-                id="favorites-heading"
-                className="text-2xl font-bold tracking-tight text-gray-900"
-              >
-                Trending Products
-              </h2>
-              <a
-                href="#"
-                className="hidden text-sm font-medium text-amber-600 hover:text-amber-500 md:block"
-              >
-                Shop the collection
-                <span aria-hidden="true"> &rarr;</span>
-              </a>
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-              {trendingProducts.map((product) => (
-                <div key={product.id} className="group relative">
-                  <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
-                    <img
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
-                  <h3 className="mt-4 text-sm text-gray-700">
-                    <a href={product.href}>
-                      <span className="absolute inset-0" />
-                      {product.name}
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                  <p className="mt-1 text-sm font-medium text-gray-900">
-                    {product.price}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 text-sm md:hidden">
-              <a
-                href="#"
-                className="font-medium text-amber-600 hover:text-amber-500"
-              >
-                Shop the collection
-                <span aria-hidden="true"> &rarr;</span>
-              </a>
-            </div>
-          </div>
-        </section>
+        <TrendingProductsSection trendingProducts={trendingProducts} />
       </main>
     </div>
   )
