@@ -1,16 +1,12 @@
 'use client'
 import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import {
   Bars3Icon,
-  MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
   ShoppingBagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 
-const currencies = ['CAD', 'USD', 'AUD', 'EUR', 'GBP']
 const navigation = {
   categories: [
     {
@@ -86,10 +82,6 @@ const navigation = {
         },
       ],
     },
-  ],
-  pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
   ],
 }
 
@@ -339,16 +331,6 @@ function Header() {
                             </>
                           )}
                         </Popover>
-                      ))}
-
-                      {navigation.pages.map((page) => (
-                        <a
-                          key={page.name}
-                          href={page.href}
-                          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                        >
-                          {page.name}
-                        </a>
                       ))}
                     </div>
                   </Popover.Group>
