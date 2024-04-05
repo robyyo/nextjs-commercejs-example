@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ActiveFilters = ({ activeFilters }) => {
+const ActiveFilters = ({ activeFilters, handleChangeFilter }) => {
   return (
     <div className="bg-gray-100">
       <div className="mx-auto max-w-7xl px-4 py-3 sm:flex sm:items-center sm:px-6 lg:px-8">
@@ -18,16 +18,17 @@ const ActiveFilters = ({ activeFilters }) => {
           <div className="-m-1 flex flex-wrap items-center">
             {activeFilters.map((activeFilter) => (
               <span
-                key={activeFilter.value}
+                key={activeFilter.id}
                 className="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900"
               >
-                <span>{activeFilter.label}</span>
+                <span>{activeFilter.name}</span>
                 <button
                   type="button"
                   className="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500"
+                  onClick={() => handleChangeFilter(activeFilter.id)}
                 >
                   <span className="sr-only">
-                    Remove filter for {activeFilter.label}
+                    Remove filter for {activeFilter.slug}
                   </span>
                   <svg
                     className="h-2 w-2"
