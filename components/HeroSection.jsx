@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 const HeroSection = ({ collections }) => {
   return (
@@ -44,12 +45,12 @@ const HeroSection = ({ collections }) => {
             Mid-Season Sale
           </h1>
           <div className="mt-4 sm:mt-6">
-            <a
-              href="#"
+            <Link
+              href="/products"
               className="inline-block rounded-md border border-transparent bg-amber-600 px-8 py-3 font-medium text-white hover:bg-amber-700"
             >
               Shop Collection
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -87,10 +88,10 @@ const HeroSection = ({ collections }) => {
                       Shop the collection
                     </p>
                     <h3 className="mt-1 font-semibold text-white">
-                      <a href={collection.href}>
+                      <Link href={collection.href}>
                         <span className="absolute inset-0" />
                         {collection.name}
-                      </a>
+                      </Link>
                     </h3>
                   </div>
                 </div>
