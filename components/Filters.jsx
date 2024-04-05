@@ -12,6 +12,7 @@ const Filters = ({
   sortOptions,
   categories,
   handleChangeFilter,
+  handleChangeSortOption,
   activeFilters,
 }) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -129,18 +130,18 @@ const Filters = ({
                   {sortOptions.map((option) => (
                     <Menu.Item key={option.name}>
                       {({ active }) => (
-                        <a
-                          href={option.href}
+                        <button
                           className={classNames(
                             option.current
-                              ? 'font-medium text-gray-900'
+                              ? 'font-medium text-amber-900'
                               : 'text-gray-500',
                             active ? 'bg-gray-100' : '',
                             'block px-4 py-2 text-sm',
                           )}
+                          onClick={() => handleChangeSortOption(option.name)}
                         >
                           {option.name}
-                        </a>
+                        </button>
                       )}
                     </Menu.Item>
                   ))}

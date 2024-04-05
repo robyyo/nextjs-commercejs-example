@@ -4,12 +4,6 @@ import ProductFilter from '@/components/ProductFilter'
 const { data: products } = await commerce.products.list()
 const { data: categories } = await commerce.categories.list()
 
-const sortOptions = [
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
-]
-
 const ProductsPage = () => {
   return (
     <div className="bg-gray-50">
@@ -27,11 +21,7 @@ const ProductsPage = () => {
               </p>
             </div>
           </div>
-          <ProductFilter
-            sortOptions={sortOptions}
-            products={products}
-            categories={categories}
-          />
+          <ProductFilter products={products} categories={categories} />
         </main>
       </div>
     </div>
