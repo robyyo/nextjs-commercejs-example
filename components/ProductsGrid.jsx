@@ -1,6 +1,7 @@
 import React from 'react'
 
 const ProductsGrid = ({ products, sortOptions }) => {
+  // Sort products based on the selected sort option
   const sortedProducts = products.sort((a, b) => {
     if (sortOptions[0].current) {
       return a.created - b.created

@@ -4,6 +4,7 @@ import { Menu, Popover, Transition, Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
+// Handles dynamic class names for active sort method
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -19,6 +20,9 @@ const Filters = ({
 
   return (
     <>
+      {
+        //#region /* Mobile Filters Menu Start */
+      }
       <h2 id="filter-heading" className="sr-only">
         Filters
       </h2>
@@ -103,6 +107,13 @@ const Filters = ({
         </Dialog>
       </Transition.Root>
 
+      {
+        //#endregion /* Mobile Filters Menu End */
+      }
+
+      {
+        //#region /* Desktop Filters Menu Start */
+      }
       <div className="border-b border-gray-200 bg-white pb-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Menu as="div" className="relative inline-block text-left">
@@ -133,7 +144,7 @@ const Filters = ({
                         <button
                           className={classNames(
                             option.current
-                              ? 'font-medium text-amber-900'
+                              ? 'font-medium text-amber-600'
                               : 'text-gray-500',
                             active ? 'bg-gray-100' : '',
                             'block px-4 py-2 text-sm',
@@ -213,6 +224,9 @@ const Filters = ({
           </div>
         </div>
       </div>
+      {
+        //#endregion /* Desktop Filters Menu End */
+      }
     </>
   )
 }
