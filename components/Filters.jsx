@@ -1,11 +1,6 @@
+'use client'
 import { Fragment, useState } from 'react'
-import {
-  Menu,
-  Popover,
-  Transition,
-  Dialog,
-  Disclosure,
-} from '@headlessui/react'
+import { Menu, Popover, Transition, Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
@@ -13,8 +8,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const Filters = ({ filters, sortOptions }) => {
+const Filters = ({
+  sortOptions,
+  categories,
+  handleChangeFilter,
+  activeFilters,
+}) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+
   return (
     <>
       <h2 id="filter-heading" className="sr-only">
@@ -63,59 +64,37 @@ const Filters = ({ filters, sortOptions }) => {
 
                 {/* Filters */}
                 <form className="mt-4">
-                  {filters.map((section) => (
-                    <Disclosure
-                      as="div"
-                      key={section.name}
-                      className="border-t border-gray-200 px-4 py-6"
-                    >
-                      {({ open }) => (
-                        <>
-                          <h3 className="-mx-2 -my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
-                              <span className="font-medium text-gray-900">
-                                {section.name}
-                              </span>
-                              <span className="ml-6 flex items-center">
-                                <ChevronDownIcon
-                                  className={classNames(
-                                    open ? '-rotate-180' : 'rotate-0',
-                                    'h-5 w-5 transform',
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </span>
-                            </Disclosure.Button>
-                          </h3>
-                          <Disclosure.Panel className="pt-6">
-                            <div className="space-y-6">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-mobile-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-500"
-                                  >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </Disclosure.Panel>
-                        </>
-                      )}
-                    </Disclosure>
-                  ))}
+                  <div className="border-t border-gray-200 px-4 py-6">
+                    <h3 className="-mx-2 -my-3 flow-root">
+                      <div className="flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
+                        <span className="font-medium text-gray-900">
+                          Category
+                        </span>
+                      </div>
+                    </h3>
+                    <div className="pt-6">
+                      <div className="space-y-6">
+                        {categories.map((category, optionIdx) => (
+                          <div key={category.id} className="flex items-center">
+                            <input
+                              id={`filter-mobile-${category.id}-${optionIdx}`}
+                              name={`${category.slug}`}
+                              type="checkbox"
+                              checked={category.checked || false}
+                              onChange={() => handleChangeFilter(category.id)}
+                              className="h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                            />
+                            <label
+                              htmlFor={`filter-mobile-${category.id}-${optionIdx}`}
+                              className="ml-3 text-sm text-gray-500"
+                            >
+                              {category.name}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </Dialog.Panel>
             </Transition.Child>
@@ -181,61 +160,53 @@ const Filters = ({ filters, sortOptions }) => {
           <div className="hidden sm:block">
             <div className="flow-root">
               <Popover.Group className="-mx-4 flex items-center divide-x divide-gray-200">
-                {filters.map((section, sectionIdx) => (
-                  <Popover
-                    key={section.name}
-                    className="relative inline-block px-4 text-left"
-                  >
-                    <Popover.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                      <span>{section.name}</span>
-                      {sectionIdx === 0 ? (
-                        <span className="ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700">
-                          1
-                        </span>
-                      ) : null}
-                      <ChevronDownIcon
-                        className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
+                <Popover className="relative inline-block px-4 text-left">
+                  <Popover.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                    <span>Category</span>
+                    {activeFilters != 0 ? (
+                      <span className="ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700">
+                        {activeFilters.length}
+                      </span>
+                    ) : null}
+                    <ChevronDownIcon
+                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      aria-hidden="true"
+                    />
+                  </Popover.Button>
 
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Popover.Panel className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <form className="space-y-4">
-                          {section.options.map((option, optionIdx) => (
-                            <div
-                              key={option.value}
-                              className="flex items-center"
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Popover.Panel className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <form className="space-y-4">
+                        {categories.map((category, optionIdx) => (
+                          <div key={category.id} className="flex items-center">
+                            <input
+                              id={`filter-mobile-${category.id}-${optionIdx}`}
+                              name={`${category.slug}`}
+                              type="checkbox"
+                              checked={category.checked || false}
+                              onChange={() => handleChangeFilter(category.id)}
+                              className="h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                            />
+                            <label
+                              htmlFor={`filter-mobile-${category.id}-${optionIdx}`}
+                              className="ml-3 text-sm text-gray-500"
                             >
-                              <input
-                                id={`filter-${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                defaultValue={option.value}
-                                type="checkbox"
-                                defaultChecked={option.checked}
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                              />
-                              <label
-                                htmlFor={`filter-${section.id}-${optionIdx}`}
-                                className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
-                              >
-                                {option.label}
-                              </label>
-                            </div>
-                          ))}
-                        </form>
-                      </Popover.Panel>
-                    </Transition>
-                  </Popover>
-                ))}
+                              {category.name}
+                            </label>
+                          </div>
+                        ))}
+                      </form>
+                    </Popover.Panel>
+                  </Transition>
+                </Popover>
               </Popover.Group>
             </div>
           </div>
