@@ -156,7 +156,6 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       <main>
-        {/* Hero section */}
         <HeroSection collections={collections} />
         <TrendingProductsSection trendingProducts={trendingProducts} />
       </main>
