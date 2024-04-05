@@ -1,6 +1,7 @@
 import commerce from '@/lib/commerce'
 import ProductFilter from '@/components/ProductFilter'
 
+// Fetch products and categories from Chec API
 const { data: products } = await commerce.products.list()
 const { data: categories } = await commerce.categories.list()
 
@@ -21,6 +22,7 @@ const ProductsPage = () => {
               </p>
             </div>
           </div>
+          {/* Passing Chec data to ProductFilter */}
           <ProductFilter products={products} categories={categories} />
         </main>
       </div>

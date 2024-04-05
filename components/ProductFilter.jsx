@@ -5,10 +5,7 @@ import ActiveFilters from './ActiveFilter'
 import Filters from './Filters'
 
 const ProductFilter = ({ products, categories }) => {
-  let addCheckedToCategories = categories.map((category) => {
-    return { ...category, checked: false }
-  })
-
+  // Add sort options
   const [sortOptions, setSortOptions] = useState([
     { name: 'Newest', href: '#', current: false },
     { name: 'Oldest', href: '#', current: false },
@@ -16,11 +13,20 @@ const ProductFilter = ({ products, categories }) => {
     { name: 'Price: High to Low', href: '#', current: false },
   ])
 
+  // Add checked property to categories
+  let addCheckedToCategories = categories.map((category) => {
+    return { ...category, checked: false }
+  })
+
+  // Add update categories with checked property to component state
   const [updatedCategories, setUpdatedCategories] = useState(
     addCheckedToCategories,
   )
+
+  // Add active filters data
   let activeFilters = updatedCategories.filter((category) => category.checked)
 
+  // Logic for filtering products based on active filters
   let filteredProducts = products.filter((product) => {
     let activeCategoryList = activeFilters.map((category) => category.slug)
     if (activeCategoryList.length === 0) return true
