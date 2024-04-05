@@ -3,6 +3,7 @@ import { useState } from 'react'
 import ProductsGrid from './ProductsGrid'
 import ActiveFilters from './ActiveFilter'
 import Filters from './Filters'
+import ProductPageHeader from './ProductPageHeader'
 
 const ProductFilter = ({ products, categories }) => {
   // Add sort options
@@ -57,22 +58,27 @@ const ProductFilter = ({ products, categories }) => {
   }
 
   return (
-    <div className="bg-gray-50">
-      <section aria-labelledby="filter-heading">
-        <Filters
-          sortOptions={sortOptions}
-          categories={updatedCategories}
-          handleChangeFilter={handleChangeFilter}
-          activeFilters={activeFilters}
-          handleChangeSortOption={handleChangeSortOption}
-        />
-        <ActiveFilters
-          activeFilters={activeFilters}
-          handleChangeFilter={handleChangeFilter}
-        />
-        <ProductsGrid products={filteredProducts} sortOptions={sortOptions} />
-      </section>
-    </div>
+    <>
+      {/* Products Page Header */}
+      <ProductPageHeader activeFilters={activeFilters} />
+      {/* Product Filter */}
+      <div className="bg-gray-50">
+        <section aria-labelledby="filter-heading">
+          <Filters
+            sortOptions={sortOptions}
+            categories={updatedCategories}
+            handleChangeFilter={handleChangeFilter}
+            activeFilters={activeFilters}
+            handleChangeSortOption={handleChangeSortOption}
+          />
+          <ActiveFilters
+            activeFilters={activeFilters}
+            handleChangeFilter={handleChangeFilter}
+          />
+          <ProductsGrid products={filteredProducts} sortOptions={sortOptions} />
+        </section>
+      </div>
+    </>
   )
 }
 
