@@ -2,52 +2,9 @@ import commerce from '@/lib/commerce'
 import ProductFilter from '@/components/ProductFilter'
 
 const { data: products } = await commerce.products.list()
-
-console.log(products)
-
-const filters = [
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'new-arrivals', label: 'All New Arrivals', checked: false },
-      { value: 'tees', label: 'Tees', checked: false },
-      { value: 'objects', label: 'Objects', checked: true },
-      { value: 'sweatshirts', label: 'Sweatshirts', checked: false },
-      { value: 'pants-shorts', label: 'Pants & Shorts', checked: false },
-    ],
-  },
-  {
-    id: 'color',
-    name: 'Color',
-    options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: false },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    ],
-  },
-  {
-    id: 'sizes',
-    name: 'Sizes',
-    options: [
-      { value: 'xs', label: 'XS', checked: false },
-      { value: 's', label: 'S', checked: false },
-      { value: 'm', label: 'M', checked: false },
-      { value: 'l', label: 'L', checked: false },
-      { value: 'xl', label: 'XL', checked: false },
-      { value: '2xl', label: '2XL', checked: false },
-    ],
-  },
-]
-
-const activeFilters = [{ value: 'objects', label: 'Objects' }]
+const { data: categories } = await commerce.categories.list()
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
   { name: 'Newest', href: '#', current: false },
   { name: 'Price: Low to High', href: '#', current: false },
   { name: 'Price: High to Low', href: '#', current: false },
@@ -71,10 +28,9 @@ const ProductsPage = () => {
             </div>
           </div>
           <ProductFilter
-            filters={filters}
-            activeFilters={activeFilters}
             sortOptions={sortOptions}
             products={products}
+            categories={categories}
           />
         </main>
       </div>
