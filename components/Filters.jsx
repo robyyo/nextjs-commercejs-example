@@ -18,6 +18,10 @@ const Filters = ({
 }) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
 
+  const activeSortOption = sortOptions.filter(
+    (option) => option.current || [{ name: '' }],
+  )[0]
+
   return (
     <>
       {
